@@ -9,8 +9,6 @@ export default function Cast() {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
 
-  //const profile = moviePage.find(page => page.id === movieId);
-
   useEffect(() => {
     movieAPI.fetchMovieCredits(movieId).then((movie) => {
       setCast(movie.cast);

@@ -1,19 +1,11 @@
 import { lazy, Suspense } from "react";
 import { Switch, Route } from "react-router-dom";
-
 //react-loader-spinner
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-
 //Navigation
 import { Navigation } from "./components/Navigation/Navigation";
-//import { routes } from './utils/routes';
 import "./App.css";
-//Views
-//  import  HomeViews  from './Views/HomeViews';
-// import  MovieViews  from './Views/MovieViews';
-// import  MovieDetailsPageViews  from './Views/MovieDetailsPageViews';
-// import  NotFound  from './Views/NotFound/NotFound';
 
 //Views
 const HomeViews = lazy(() =>
@@ -41,7 +33,6 @@ function App() {
           <div>
             <Loader
               type="MutatingDots"
-              //type="Watch"
               color="#00BFFF"
               height={80}
               width={80}

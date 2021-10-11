@@ -29,7 +29,6 @@ function fetchMovieCredits(movieId) {
   return fetch(
     `${BASE_URL}/movie/${movieId}/credits?api_key=${KEY}&language=en-US`
   ).then((response) => {
-    //console.log(response.json());
     return response.json();
   });
 }
