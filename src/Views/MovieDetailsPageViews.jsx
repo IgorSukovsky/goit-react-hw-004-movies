@@ -1,6 +1,6 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
-import Loader from 'react-loader-spinner';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import { useState, useEffect, lazy, Suspense } from "react";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import {
   useParams,
@@ -9,18 +9,17 @@ import {
   NavLink,
   useHistory,
   Link,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import movieAPI from '../components/MovieApi/MovieApi';
-import s from './Views.module.css';
-
+import movieAPI from "../MovieApi/MovieApi";
+import s from "./Views.module.css";
 
 //Views
 const Cast = lazy(() =>
-  import('../Views/Cast/Cast.jsx' /* webpackChunkName: "cast" */),
+  import("../components/Cast/Cast.jsx" /* webpackChunkName: "cast" */)
 );
 const Reviews = lazy(() =>
-  import('../Views/Reviews/Reviews.jsx' /* webpackChunkName: "reviews" */),
+  import("../components/Reviews/Reviews.jsx" /* webpackChunkName: "reviews" */)
 );
 
 export default function MovieDetailsPageViews() {
@@ -28,16 +27,16 @@ export default function MovieDetailsPageViews() {
   const [moviePage, setMoviesPage] = useState([]);
   const history = useHistory();
   const { state } = history.location;
-  const prevLink = `${state.url}${state.query}`;
+  const prevLink = state && `${state.url}${state.query}`;
 
-  console.log(state.query);
   useEffect(() => {
-    movieAPI.fetchMovieById(movieId).then(movie => {
-      setMoviesPage(movie);
-    });
+    movieAPI
+      .fetchMovieById(movieId)
+      .then((movie) => {
+        setMoviesPage(movie);
+      })
+      .catch((error) => console.log(error));
   }, [movieId]);
-
-  //! console.log(movieId);
 
   return (
     <div className={s.container}>
@@ -52,7 +51,6 @@ export default function MovieDetailsPageViews() {
               ? `https://image.tmdb.org/t/p/w500/${moviePage.poster_path}`
               : null
           }
-          
           alt={moviePage.title}
           width="300"
           height="250"
@@ -79,13 +77,11 @@ export default function MovieDetailsPageViews() {
         </div>
       </div>
 
-      
       {moviePage && (
         <div>
           <ul>
             <li className={s.description}>
               <NavLink
-                
                 to={{
                   pathname: `/movies/${movieId}/cast`,
                   state: {
@@ -100,7 +96,6 @@ export default function MovieDetailsPageViews() {
             </li>
             <li className={s.description}>
               <NavLink
-                
                 to={{
                   pathname: `/movies/${movieId}/reviews`,
                   state: {
@@ -117,13 +112,11 @@ export default function MovieDetailsPageViews() {
         </div>
       )}
 
-      
       <Suspense
         fallback={
           <div>
             <Loader
               type="MutatingDots"
-              
               color="#00BFFF"
               height={80}
               width={80}
@@ -133,10 +126,10 @@ export default function MovieDetailsPageViews() {
         }
       >
         <Switch>
-          <Route path="/movies/:movieId/cast">
+          <Route path="/movies/:movieId/cast" exact>
             <Cast>{moviePage && <Cast movieId={movieId} />}</Cast>
           </Route>
-          <Route path="/movies/:movieId/reviews">
+          <Route path="/movies/:movieId/reviews" exact>
             <Reviews movieId={movieId} />
           </Route>
         </Switch>

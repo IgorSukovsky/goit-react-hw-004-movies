@@ -1,5 +1,5 @@
-import { lazy, Suspense } from "react";
-import { Switch, Route } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 //react-loader-spinner
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -19,11 +19,21 @@ const MovieDetailsPageViews = lazy(() =>
     "./Views/MovieDetailsPageViews.jsx" /* webpackChunkName: "movie-details" */
   )
 );
-const NotFound = lazy(() =>
-  import("./Views/NotFound/NotFound.jsx" /* webpackChunkName: "not-found" */)
-);
+
+// const NotFound = lazy(() =>
+//   import("./Views/NotFound/NotFound.jsx" /* webpackChunkName: "not-found" */)
+// );
 
 function App() {
+  const {
+    location: { pathname },
+  } = useHistory();
+  console.log();
+
+  useEffect(() => {
+    console.log(pathname);
+  }, [pathname]);
+
   return (
     <div className="App">
       <Navigation />
@@ -55,7 +65,8 @@ function App() {
           </Route>
 
           <Route>
-            <NotFound />
+            <Redirect to="/" />
+            {/* <NotFound /> */}
           </Route>
         </Switch>
       </Suspense>

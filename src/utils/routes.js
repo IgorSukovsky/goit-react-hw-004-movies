@@ -1,6 +1,6 @@
 const routes = {
-  home: '/',
-  movies: '/movies',
+  home: "/",
+  movies: "/movies",
 };
 
 export { routes };

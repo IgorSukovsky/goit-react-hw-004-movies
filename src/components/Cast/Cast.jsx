@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import movieAPI from "../../components/MovieApi/MovieApi";
+import movieAPI from "../../MovieApi/MovieApi";
 
-import s from "../Views.module.css";
+import s from "../../Views/Views.module.css";
 
 export default function Cast() {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
-    movieAPI.fetchMovieCredits(movieId).then((movie) => {
-      setCast(movie.cast);
-    });
+    movieAPI
+      .fetchMovieCredits(movieId)
+      .then((movie) => {
+        setCast(movie.cast);
+      })
+      .catch((error) => console.log(error));
   }, [movieId]);
 
   return (
