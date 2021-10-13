@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
-import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 //react-loader-spinner
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -64,10 +64,10 @@ function App() {
             <MovieDetailsPageViews />
           </Route>
 
-          <Route>
-            <Redirect to="/" />
-            {/* <NotFound /> */}
-          </Route>
+          <Route component={() => <h2>notFound</h2>} />
+
+          <Redirect to="/movies/:movieId/<h2>notFound</h2>" />
+          {/* <NotFound /> */}
         </Switch>
       </Suspense>
     </div>

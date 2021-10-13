@@ -132,6 +132,11 @@ export default function MovieDetailsPageViews() {
           <Route path="/movies/:movieId/reviews" exact>
             <Reviews movieId={movieId} />
           </Route>
+          {/* <Route
+            // component={() => <h2>notFound</h2>}
+            path="/movies/:movieId/<h2>notFound</h2> "
+            exact={false}
+          /> */}
         </Switch>
       </Suspense>
     </div>
