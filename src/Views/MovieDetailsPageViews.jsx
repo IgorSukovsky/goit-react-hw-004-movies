@@ -15,7 +15,7 @@ import {
 import movieAPI from "../MovieApi/MovieApi";
 import s from "./Views.module.css";
 
-//Views
+
 const Cast = lazy(() =>
   import("../components/Cast/Cast.jsx" /* webpackChunkName: "cast" */)
 );

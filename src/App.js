@@ -20,10 +20,6 @@ const MovieDetailsPageViews = lazy(() =>
   )
 );
 
-// const NotFound = lazy(() =>
-//   import("./Views/NotFound/NotFound.jsx" /* webpackChunkName: "not-found" */)
-// );
-
 function App() {
   const {
     location: { pathname },
