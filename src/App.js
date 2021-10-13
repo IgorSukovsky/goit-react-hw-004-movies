@@ -64,10 +64,9 @@ function App() {
             <MovieDetailsPageViews />
           </Route>
 
-          <Route component={() => <h2>notFound</h2>} />
+          {/* <Route component={() => <h2>notFound</h2>} /> */}
 
-          <Redirect to="/movies/:movieId/<h2>notFound</h2>" />
-          {/* <NotFound /> */}
+          <Redirect to="/" />
         </Switch>
       </Suspense>
     </div>

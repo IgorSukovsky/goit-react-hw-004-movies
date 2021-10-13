@@ -9,6 +9,7 @@ import {
   NavLink,
   useHistory,
   Link,
+  Redirect,
 } from "react-router-dom";
 
 import movieAPI from "../MovieApi/MovieApi";
@@ -27,7 +28,9 @@ export default function MovieDetailsPageViews() {
   const [moviePage, setMoviesPage] = useState([]);
   const history = useHistory();
   const { state } = history.location;
-  const prevLink = state && `${state.url}${state.query}`;
+
+  const prevLink = state ? `${state.url}${state.query}` : "/";
+  console.log(prevLink);
 
   useEffect(() => {
     movieAPI
@@ -85,8 +88,8 @@ export default function MovieDetailsPageViews() {
                 to={{
                   pathname: `/movies/${movieId}/cast`,
                   state: {
-                    url: state.url,
-                    query: state.query,
+                    url: state ? state.url : "/",
+                    query: state ? state.query : "",
                   },
                 }}
                 activeClassName={s.activeLink}
@@ -99,8 +102,8 @@ export default function MovieDetailsPageViews() {
                 to={{
                   pathname: `/movies/${movieId}/reviews`,
                   state: {
-                    url: state.url,
-                    query: state.query,
+                    url: state ? state.url : "/",
+                    query: state ? state.query : "",
                   },
                 }}
                 activeClassName={s.activeLink}
@@ -126,10 +129,10 @@ export default function MovieDetailsPageViews() {
         }
       >
         <Switch>
-          <Route path="/movies/:movieId/cast" exact>
+          <Route path="/movies/:movieId/cast">
             <Cast>{moviePage && <Cast movieId={movieId} />}</Cast>
           </Route>
-          <Route path="/movies/:movieId/reviews" exact>
+          <Route path="/movies/:movieId/reviews">
             <Reviews movieId={movieId} />
           </Route>
           {/* <Route
@@ -137,6 +140,7 @@ export default function MovieDetailsPageViews() {
             path="/movies/:movieId/<h2>notFound</h2> "
             exact={false}
           /> */}
+          <Redirect to={`/movies/${movieId}`} />
         </Switch>
       </Suspense>
     </div>
