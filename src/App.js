@@ -64,8 +64,6 @@ function App() {
             <MovieDetailsPageViews />
           </Route>
 
-          {/* <Route component={() => <h2>notFound</h2>} /> */}
-
           <Redirect to="/" />
         </Switch>
       </Suspense>
