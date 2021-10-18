@@ -27,15 +27,23 @@ export default function Cast() {
             {cast.map((photoActor) => (
               <li key={photoActor.id} className={s.actorCard}>
                 <div>
-                  <img
-                    src={
-                      photoActor.profile_path
-                        ? `https://image.tmdb.org/t/p/w500/${photoActor.profile_path}`
-                        : null
-                    }
-                    alt={`${photoActor.name}`}
-                    className={s.castImg}
-                  />
+                  {photoActor.profile_path ? (
+                    <img
+                      src={
+                        photoActor.profile_path
+                          ? `https://image.tmdb.org/t/p/w500/${photoActor.profile_path}`
+                          : null
+                      }
+                      alt={`${photoActor.name}`}
+                      className={s.castImg}
+                    />
+                  ) : (
+                    <img
+                      src={`https://static6.depositphotos.com/1002881/580/i/950/depositphotos_5804811-stock-photo-error-404.jpg`}
+                      alt={photoActor.name}
+                      className={s.castImg}
+                    />
+                  )}
                   <h3>{photoActor.original_name}</h3>
                 </div>
               </li>
