@@ -15,7 +15,6 @@ import {
 import movieAPI from "../MovieApi/MovieApi";
 import s from "./Views.module.css";
 
-
 const Cast = lazy(() =>
   import("../components/Cast/Cast.jsx" /* webpackChunkName: "cast" */)
 );
@@ -48,17 +47,27 @@ export default function MovieDetailsPageViews() {
       </Link>
 
       <div className={s.movieDetailsPage}>
-        <img
-          src={
-            moviePage.backdrop_path
-              ? `https://image.tmdb.org/t/p/w500/${moviePage.poster_path}`
-              : null
-          }
-          alt={moviePage.title}
-          width="300"
-          height="250"
-          className={s.imgDetails}
-        />
+        {moviePage.poster_path ? (
+          <img
+            src={
+              moviePage.backdrop_path
+                ? `https://image.tmdb.org/t/p/w500/${moviePage.poster_path}`
+                : null
+            }
+            alt={moviePage.title}
+            width="300"
+            height="250"
+            className={s.imgDetails}
+          />
+        ) : (
+          <img
+            src={`https://thumbs.dfs.ivi.ru/storage8/contents/f/7/cfcdd5d1df26f7b771e2ff7be7c4c6.jpg`}
+            alt={moviePage.title}
+            width="300"
+            height="250"
+            className={s.imgDetails}
+          />
+        )}
         <div className={s.movieDescription}>
           <ul className={s.list}>
             <li>
@@ -136,7 +145,16 @@ export default function MovieDetailsPageViews() {
             <Reviews movieId={movieId} />
           </Route>
 
-          <Redirect to={`/movies/${movieId}`} />
+          {/* <Redirect to={`/movies/${movieId}`} /> */}
+          <Redirect
+            to={{
+              pathname: `/movies/${movieId}/`,
+              state: {
+                url: state ? state.url : "/",
+                query: state ? state.query : "",
+              },
+            }}
+          />
         </Switch>
       </Suspense>
     </div>
