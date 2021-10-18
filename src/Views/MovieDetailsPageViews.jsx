@@ -91,36 +91,33 @@ export default function MovieDetailsPageViews() {
 
       {moviePage && (
         <div>
-          <ul>
-            <li className={s.description}>
-              <NavLink
-                to={{
-                  pathname: `/movies/${movieId}/cast`,
-                  state: {
-                    url: state ? state.url : "/",
-                    query: state ? state.query : "",
-                  },
-                }}
-                activeClassName={s.activeLink}
-              >
-                Cast
-              </NavLink>
-            </li>
-            <li className={s.description}>
-              <NavLink
-                to={{
-                  pathname: `/movies/${movieId}/reviews`,
-                  state: {
-                    url: state ? state.url : "/",
-                    query: state ? state.query : "",
-                  },
-                }}
-                activeClassName={s.activeLink}
-              >
-                Reviews
-              </NavLink>
-            </li>
-          </ul>
+          <NavLink
+            className={s.description}
+            to={{
+              pathname: `/movies/${movieId}/cast`,
+              state: {
+                url: state ? state.url : "/",
+                query: state ? state.query : "",
+              },
+            }}
+            activeClassName={s.activeLink}
+          >
+            Cast
+          </NavLink>
+
+          <NavLink
+            className={s.description}
+            to={{
+              pathname: `/movies/${movieId}/reviews`,
+              state: {
+                url: state ? state.url : "/",
+                query: state ? state.query : "",
+              },
+            }}
+            activeClassName={s.activeLink}
+          >
+            Reviews
+          </NavLink>
         </div>
       )}
 
